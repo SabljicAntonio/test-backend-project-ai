@@ -36,3 +36,32 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+// ─── Frontend build integration ────────────────────────────────────────────────
+
+val frontendDir = file("${project.projectDir}/../frontend")
+val frontendDist = file("${frontendDir}/dist")
+val staticOutputDir = file("${project.projectDir}/src/main/resources/static")
+
+tasks.register<Exec>("npmBuild") {
+	description = "Runs 'npm run build' inside the frontend/ directory"
+	group = "build"
+	workingDir = frontendDir
+	commandLine("cmd", "/c", "npm", "run", "build")
+	inputs.dir(file("${frontendDir}/src"))
+	inputs.file(file("${frontendDir}/package.json"))
+	inputs.file(file("${frontendDir}/vite.config.js"))
+	outputs.dir(frontendDist)
+}
+
+tasks.register<Copy>("copyFrontend") {
+	description = "Copies Vite dist output into Spring Boot's static resources"
+	group = "build"
+	dependsOn("npmBuild")
+	from(frontendDist)
+	into(staticOutputDir)
+}
+
+tasks.named("processResources") {
+	dependsOn("copyFrontend")
+}
