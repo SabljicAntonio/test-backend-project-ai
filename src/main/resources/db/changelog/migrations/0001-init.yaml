@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001-init
+      author: dev
+      comment: Initial schema baseline
+      changes: []

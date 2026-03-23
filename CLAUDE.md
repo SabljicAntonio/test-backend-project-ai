@@ -6,31 +6,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Run the application
-./gradlew bootRun
+./mvnw spring-boot:run
 
 # Build
-./gradlew build
+./mvnw package
 
 # Run tests
-./gradlew test
+./mvnw test
 
 # Run a single test class
-./gradlew test --tests "project.backend.BackendApplicationTests"
+./mvnw test -Dtest="BackendApplicationTests"
 
 # Clean build artifacts
-./gradlew clean
+./mvnw clean
 ```
 
-On Windows, use `gradlew.bat` instead of `./gradlew`.
+On Windows, use `mvnw.cmd` instead of `./mvnw`.
 
 ## Architecture
 
-This is a Spring Boot 4.x web application (Java 17) built with Gradle.
+This is the backend of a **monolithic weather application**. It is a Spring Boot 4.x web application (Java 17) built with Maven.
 
 - **Entry point:** `src/main/java/project/backend/BackendApplication.java`
-- **Config:** `src/main/resources/application.yaml`
+- **Config:** `src/main/resources/application.yaml` (serves on port 8080)
 - **Package root:** `project.backend`
+- **API:** `controller/WeatherController` — `GET /api/weather` returns hardcoded `WeatherData` (city, temperature, humidity, wind, UV index, visibility, 5-day forecast)
+- **Models:** `model/WeatherData` and `model/ForecastDay` — plain Java records, serialized to JSON by Jackson
 
 Dependencies in use: Spring Web MVC, Lombok, Spring DevTools, Spring Configuration Processor.
 
-Static assets go in `src/main/resources/static/`, server-side templates in `src/main/resources/templates/`.
+The Maven build includes an `exec-maven-plugin` execution (`npm run build` in `../frontend`) and a `maven-resources-plugin` execution that copies `dist/` into `src/main/resources/static/`, producing a single self-contained JAR.

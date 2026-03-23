@@ -25,11 +25,11 @@ public class WeatherController {
             4.2,
             16.0,
             List.of(
-                new ForecastDay("Mon", 19, 13, "Sunny",         "sunny"),
-                new ForecastDay("Tue", 17, 12, "Partly Cloudy", "partly-cloudy"),
-                new ForecastDay("Wed", 14, 10, "Rainy",         "rainy"),
-                new ForecastDay("Thu", 16, 11, "Cloudy",        "cloudy"),
-                new ForecastDay("Fri", 21, 14, "Sunny",         "sunny")
+                new ForecastDay("Mon", 22, 15, "Sunny",         "sunny"),
+                new ForecastDay("Tue", 20, 14, "Partly Cloudy", "partly-cloudy"),
+                new ForecastDay("Wed", 11,  7, "Rainy",         "rainy"),
+                new ForecastDay("Thu", 13,  9, "Cloudy",        "cloudy"),
+                new ForecastDay("Fri", 25, 17, "Sunny",         "sunny")
             )
         );
     }

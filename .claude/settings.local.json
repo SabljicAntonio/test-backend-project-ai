@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm build.gradle.kts settings.gradle.kts gradlew gradlew.bat)",
+      "Bash(rm -rf gradle/)",
+      "Bash(grep -E \"\\\\.\\(java|yaml|properties\\)$\")"
+    ]
+  }
+}
